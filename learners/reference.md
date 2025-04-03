@@ -1,249 +1,126 @@
 ---
-title: 'Summary of Basic Commands'
+title: Resumen de comandos básicos
 ---
 
-## Summary of Basic Commands
 
-| Action       | Files | Folders      | 
+## Resumen de comandos básicos
+
+| Action       | Files | Folders      |
 | ------------ | ----- | ------------ |
-| Inspect      | ls    | ls           | 
-| View content | cat   | ls           | 
-| Navigate to  |       | cd           | 
-| Move         | mv    | mv           | 
-| Copy         | cp    | cp -r        | 
-| Create       | nano  | mkdir        | 
-| Delete       | rm    | rmdir, rm -r | 
+| Inspect      | ls    | ls           |
+| View content | cat   | ls           |
+| Navigate to  |       | cd           |
+| Move         | mv    | mv           |
+| Copy         | cp    | cp -r        |
+| Create       | nano  | mkdir        |
+| Delete       | rm    | rmdir, rm -r |
 
-## Filesystem hierarchy
+## Jerarquía del sistema de ficheros
 
-The following is an overview of a standard Unix filesystem.
-The exact hierarchy depends on the platform. Your file/directory structure may differ slightly:
+Lo que sigue es una visión general de un sistema de ficheros Unix estándar. La jerarquía exacta depende de la plataforma. Su estructura de archivos/directorios puede diferir ligeramente:
 
-![](fig/standard-filesystem-hierarchy.svg){alt='Linux filesystem hierarchy'}
+![](fig/standard-filesystem-hierarchy.svg){alt='Jerarquía del sistema de ficheros de Linux'}
 
-## Glossary
+## Glosario
 
-[absolute path]{#absolute-path}
-:   A [path](#path) that refers to a particular location in a file system.
-Absolute paths are usually written with respect to the file system's
-[root directory](#root-directory),
-and begin with either "/" (on Unix) or "\\" (on Microsoft Windows).
-See also: [relative path](#relative-path).
+[ruta absoluta]{#ruta-absoluta} : Una [ruta](#ruta) que hace referencia a una ubicación concreta en un sistema de archivos. Las rutas absolutas suelen escribirse con respecto al [directorio raíz](#root-directory) del sistema de archivos, y comienzan por "/" (en Unix) o "\\" (en Microsoft Windows). Véase también: [ruta relativa](#relative-path).
 
-[argument]{#argument}
-:   A value given to a function or program when it runs.
-The term is often used interchangeably (and inconsistently) with [parameter](#parameter).
+[argumento]{#argument} : Valor dado a una función o programa cuando se ejecuta. El término se utiliza a menudo de forma intercambiable (e inconsistente) con [parámetro](#parameter).
 
-[command shell]{#command-shell}
-:   See [shell](#shell)
+[comando shell]{#comando-shell} : Ver [shell](#shell)
 
-[command-line interface]{#command-line-interface}
-:   A user interface based on typing commands,
-usually at a [REPL](#read-evaluate-print-loop).
-See also: [graphical user interface](#graphical-user-interface).
+[command-line interface]{#interfaz de línea de comandos} : Interfaz de usuario basada en la introducción de comandos, normalmente en un [REPL](#read-evaluate-print-loop). Véase también: [interfaz gráfica de usuario](#graphical-user-interface).
 
-[comment]{#comment}
-:   A remark in a program that is intended to help human readers understand what is going on,
-but is ignored by the computer.
-Comments in Python, R, and the Unix shell start with a `#` character
-and run to the end of the line;
-comments in SQL start with `--`,
-and other languages have other conventions.
+[comment]{#comment} : Un comentario en un programa que pretende ayudar a los lectores humanos a entender lo que está pasando, pero que es ignorado por el ordenador. Los comentarios en Python, R, y el shell de Unix comienzan con un carácter `#` y van hasta el final de la línea; los comentarios en SQL comienzan con `--`, y otros lenguajes tienen otras convenciones.
 
-[current working directory]{#current-working-directory}
-:   The directory that [relative paths](#relative-path) are calculated from;
-equivalently,
-the place where files referenced by name only are searched for.
-Every [process](#process) has a current working directory.
-The current working directory is usually referred to using the shorthand notation `.`
-(pronounced "dot").
+[directorio de trabajo actual]{#directorio-de-trabajo-actual} : El directorio a partir del cual se calculan las [rutas relativas](#relative-path); equivalentemente, el lugar donde se buscan los ficheros referenciados sólo por su nombre. Cada [proceso](#proceso) tiene un directorio de trabajo actual. Se suele hacer referencia al directorio de trabajo actual utilizando la notación abreviada `.` (pronunciado "punto").
 
-[file system]{#file-system}
-:   A set of files, directories, and I/O devices (such as keyboards and screens).
-A file system may be spread across many physical devices,
-or many file systems may be stored on a single physical device;
-the [operating system](#operating-system) manages access.
+[sistema de archivos]{#file-system} : Conjunto de archivos, directorios y dispositivos de E/S (como teclados y pantallas). Un sistema de ficheros puede estar repartido en muchos dispositivos físicos, o muchos sistemas de ficheros pueden estar almacenados en un único dispositivo físico; el [sistema operativo](#operating-system) gestiona el acceso.
 
-[filename extension]{#filename-extension}
-:   The portion of a file's name that comes after the final "." character.
-By convention this identifies the file's type:
-`.txt` means "text file", `.png` means "Portable Network Graphics file",
-and so on. These conventions are not enforced by most operating systems:
-it is perfectly possible (but confusing!) to name an MP3 sound file `homepage.html`.
-Since many applications use filename extensions to identify the
-[MIME type](#mime-type) of the file,
-misnaming files may cause those applications to fail.
+[filename extension]{#filename-extension} : La parte del nombre de un archivo que viene después del carácter final ".". Por convención, identifica el tipo de archivo: `.txt` significa "archivo de texto", `.png` significa "archivo gráfico de red portátil", etcétera. La mayoría de los sistemas operativos no aplican estas convenciones: es perfectamente posible (¡pero confuso!) nombrar un archivo de sonido MP3 `homepage.html`. Dado que muchas aplicaciones utilizan extensiones de nombre de archivo para identificar el [tipo MIME](#tipo-mime) del archivo, nombrar mal los archivos puede hacer que esas aplicaciones fallen.
 
-[filter]{#filter}
-:   A program that transforms a stream of data.
-Many Unix command-line tools are written as filters:
-they read data from [standard input](#standard-input),
-process it, and write the result to [standard output](#standard-output).
+[filter]{#filter} : Programa que transforma un flujo de datos. Muchas herramientas de línea de comandos de Unix están escritas como filtros: leen datos de la [entrada estándar](#entradaestándar), los procesan y escriben el resultado en la [salida estándar](#salidaestándar).
 
-[for loop]{#for-loop}
-:   A loop that is executed once for each value in some kind of set, list, or range.
-See also: [while loop](#while-loop).
+[for loop]{#for-loop} : Un bucle que se ejecuta una vez por cada valor en algún tipo de conjunto, lista o rango. Véase también: [bucle while](#buclewhile).
 
-[graphical user interface]{#graphical-user-interface}
-:   A user interface based on selecting items and actions from a graphical display,
-usually controlled by using a mouse.
-See also: [command-line interface](#command-line-interface).
+[interfaz gráfica de usuario]{#graphical-user-interface} : Interfaz de usuario basada en la selección de elementos y acciones desde una pantalla gráfica, normalmente controlada mediante el uso de un ratón. Véase también: [interfaz de línea de comandos](#command-line-interface).
 
-[home directory]{#home-directory}
-:   The default directory associated with an account on a computer system.
-By convention, all of a user's files are stored in or below her home directory.
+[home directory]{#home-directory} : El directorio por defecto asociado a una cuenta en un sistema informático. Por convención, todos los archivos de un usuario se almacenan en su directorio home o debajo de él.
 
-[loop]{#loop}
-:   A set of instructions to be executed multiple times.
-Consists of a [loop body](#loop-body) and (usually) a
-condition for exiting the loop. See also [for loop](#for-loop) and [while loop](#while-loop).
+[bucle]{#bucle} : Conjunto de instrucciones que se ejecutan varias veces. Consiste en un [cuerpo de bucle](#cuerpo-de-bucle) y (normalmente) una condición para salir del bucle. Véase también [bucle for](#buclefor) y [bucle while](#buclewhile).
 
-[loop body]{#loop-body}
-:   The set of statements or commands that are repeated inside a [for loop](#for-loop)
-or [while loop](#while-loop).
+[loop body]{#loop-body} : Conjunto de sentencias o comandos que se repiten dentro de un [bucle for](#buclefor) o [bucle while](#buclewhile).
 
-[MIME type]{#mime-type}
-:   MIME (Multi-Purpose Internet Mail Extensions) types describe different file types for exchange
-on the Internet, for example, images, audio, and documents.
+[MIME type]{#mime-type} : Los tipos MIME (Multi-Purpose Internet Mail Extensions) describen diferentes tipos de archivos para su intercambio en Internet, por ejemplo, imágenes, audio y documentos.
 
-[operating system]{#operating-system}
-:   Software that manages interactions between users, hardware, and software [processes](#process).
-Common examples are Linux, macOS, and Windows.
+[sistema operativo]{#operating-system} : Software que gestiona las interacciones entre usuarios, hardware y software [procesos](#process). Ejemplos comunes son Linux, macOS y Windows.
 
-[option]{#option}
-:   A way to specify an argument or setting to a command-line program.
-By convention Unix applications use a dash followed by a single letter,
-such as `-v`, or two dashes followed by a word, such as `--verbose`,
-while DOS applications use a slash, such as `/V`.
-Depending on the application, an option may be followed by a single argument,
-as in `-o /tmp/output.txt`.
+[option]{#opción} : Una forma de especificar un argumento o ajuste a un programa de línea de comandos. Por convención, las aplicaciones Unix utilizan un guión seguido de una sola letra, como `-v`, o dos guiones seguidos de una palabra, como `--verbose`, mientras que las aplicaciones DOS utilizan una barra, como `/V`. Dependiendo de la aplicación, una opción puede ir seguida de un único argumento, como en `-o /tmp/output.txt`.
 
-[parameter]{#parameter}
-:   A variable named in a function's declaration that is used to hold a value passed into the call.
-The term is often used interchangeably (and inconsistently) with [argument](#argument).
+[parameter]{#parameter} : Una variable nombrada en la declaración de una función que se utiliza para contener un valor pasado en la llamada. El término se utiliza a menudo indistintamente (e inconsistentemente) con [argumento](#argumento).
 
-[parent directory]{#parent-directory}
-:   The directory that "contains" the one in question.
-Every directory in a file system except the [root directory](#root-directory) has a parent.
-A directory's parent is usually referred to using the shorthand notation `..`
-(pronounced "dot dot").
+[directorio-padre]{#directorio-padre} : El directorio que "contiene" al directorio en cuestión. Cada directorio en un sistema de archivos excepto el [directorio raíz](#directorio-raíz) tiene un padre. Se suele hacer referencia al directorio padre utilizando la notación abreviada `..` (pronunciado "dot dot").
 
-[path]{#path}
-:   A description that specifies the location of a file or directory within a
-[file system](#file-system).
-See also: [absolute path](#absolute-path), [relative path](#relative-path).
+[ruta]{#ruta} : Descripción que especifica la ubicación de un archivo o directorio dentro de un [sistema de archivos](#sistema-de-archivos). Véase también: [ruta absoluta](#ruta-absoluta), [ruta relativa](#ruta-relativa).
 
-[pipe]{#pipe}
-:   A connection from the output of one program to the input of another.
-When two or more programs are connected in this way, they are called a "pipeline".
+[pipe]{#tubería} : Una conexión desde la salida de un programa a la entrada de otro. Cuando dos o más programas están conectados de esta manera, se les llama "pipeline".
 
-[process]{#process}
-:   A running instance of a program, containing code, variable values,
-open files and network connections, and so on.
-Processes are the "actors" that the [operating system](#operating-system) manages;
-it typically runs each process for a few milliseconds at a time
-to give the impression that they are executing simultaneously.
+[proceso]{#process} : Una instancia en ejecución de un programa, que contiene código, valores de variables, archivos abiertos y conexiones de red, etc. Los procesos son los "actores" que gestiona el [sistema operativo](#operating-system); normalmente ejecuta cada proceso durante unos milisegundos cada vez para dar la impresión de que se están ejecutando simultáneamente.
 
-[prompt]{#prompt}
-:   A character or characters display by a [REPL](#read-evaluate-print-loop) to show that
-it is waiting for its next command.
+[prompt]{#prompt} : Carácter o caracteres mostrados por un [REPL](#read-evaluate-print-loop) para mostrar que está esperando su siguiente comando.
 
-[quoting]{#quoting}
-:   (in the shell):
-Using quotation marks of various kinds to prevent the shell from interpreting special
-characters.
-For example, to pass the string `*.txt` to a program,
-it is usually necessary to write it as `'*.txt'` (with single quotes)
-so that the shell will not try to expand the `*` wildcard.
+[quoting]{#quoting} : (en el shell): Uso de comillas de varios tipos para evitar que el shell interprete caracteres especiales. Por ejemplo, para pasar la cadena `*.txt` a un programa, suele ser necesario escribirla como `'*.txt'` (con comillas simples) para que el shell no intente expandir el comodín `*`.
 
-[read-evaluate-print loop]{#read-evaluate-print-loop}
-:   (REPL): A [command-line interface](#command-line-interface) that reads a command from the user,
-executes it, prints the result, and waits for another command.
+[bucle de lectura-evaluación-impresión]{#read-evaluate-print-loop} : (REPL): Una [interfaz de línea de comandos](#command-line-interface) que lee un comando del usuario, lo ejecuta, imprime el resultado y espera otro comando.
 
-[redirect]{#redirect}
-:   To send a command's output to a file rather than to the screen or another command,
-or equivalently to read a command's input from a file.
+[redirect]{#redirect} : Para enviar la salida de un comando a un archivo en lugar de a la pantalla o a otro comando, o equivalentemente para leer la entrada de un comando desde un archivo.
 
-[regular expression]{#regular-expression}
-:   A pattern that specifies a set of character strings.
-REs are most often used to find sequences of characters in strings.
+[expresión regular]{#regular-expression} : Un patrón que especifica un conjunto de cadenas de caracteres. Las expresiones regulares se suelen utilizar para encontrar secuencias de caracteres en cadenas.
 
-[relative path]{#relative-path}
-:   A [path](#path) that specifies the location of a file or directory
-with respect to the [current working directory](#current-working-directory).
-Any path that does not begin with a separator character ("/" or "\\") is a relative path.
-See also: [absolute path](#absolute-path).
+[ruta relativa]{#relative-path} : Una [ruta](#path) que especifica la ubicación de un archivo o directorio con respecto al [directorio de trabajo actual](#current-working-directory). Cualquier ruta que no comience con un carácter separador ("/" o "\\") es una ruta relativa. Véase también: [ruta absoluta](#ruta-absoluta).
 
-[root directory]{#root-directory}
-:   The top-most directory in a [file system](#file-system).
-Its name is "/" on Unix (including Linux and macOS) and "\\" on Microsoft Windows.
+[directorio raíz]{#root-directory} : El directorio más alto en un [sistema de archivos](#file-system). Su nombre es "/" en Unix (incluyendo Linux y macOS) y "/" en Microsoft Windows.
 
-[shell]{#shell}
-:   A [command-line interface](#command-line-interface) such as Bash (the Bourne-Again Shell)
-or the Microsoft Windows DOS shell
-that allows a user to interact with the [operating system](#operating-system).
+[shell]{#shell} : Una [interfaz de línea de comandos](#interfaz de línea de comandos) como Bash (la Bourne-Again Shell) o la shell DOS de Microsoft Windows que permite a un usuario interactuar con el [sistema operativo](#sistema operativo).
 
-[shell script]{#shell-script}
-:   A set of [shell](#shell) commands stored in a file for re-use.
-A shell script is a program executed by the shell;
-the name "script" is used for historical reasons.
+[shell script]{#shell-script} : Conjunto de comandos [shell](#shell) almacenados en un archivo para su reutilización. Un script de shell es un programa ejecutado por el shell; el nombre "script" se utiliza por razones históricas.
 
-[standard input]{#standard-input}
-:   A process's default input stream.
-In interactive command-line applications,
-it is typically connected to the keyboard;
-in a [pipe](#pipe),
-it receives data from the [standard output](#standard-output) of the preceding process.
+[standard input]{#standard-input} : El flujo de entrada por defecto de un proceso. En aplicaciones interactivas de línea de comandos, suele estar conectado al teclado; en una [tubería](#pipe), recibe datos de la [salida estándar](#standard-output) del proceso precedente.
 
-[standard output]{#standard-output}
-:   A process's default output stream.
-In interactive command-line applications,
-data sent to standard output is displayed on the screen;
-in a [pipe](#pipe),
-it is passed to the [standard input](#standard-input) of the next process.
+[standard output]{#standard-output} : El flujo de salida por defecto de un proceso. En aplicaciones interactivas de línea de comandos, los datos enviados a la salida estándar se muestran en la pantalla; en una [tubería](#pipe), se pasan a la [entrada estándar](#standard-input) del siguiente proceso.
 
-[sub-directory]{#sub-directory}
-:   A directory contained within another directory.
+[subdirectorio]{#sub-directorio} : Un directorio contenido dentro de otro directorio.
 
-[tab completion]{#tab-completion}
-:   A feature provided by many interactive systems in which
-pressing the Tab key triggers automatic completion of the current word or command.
+[tab-completion]{#tab-completion} : Característica de muchos sistemas interactivos por la que, al pulsar la tecla Tab, se completa automáticamente la palabra o comando actual.
 
-[variable]{#variable}
-:   A name in a program that is associated with a value or a collection of values.
+[variable]{#variable} : Un nombre en un programa que está asociado con un valor o una colección de valores.
 
-[while loop]{#while-loop}
-:   A loop that keeps executing as long as some condition is true.
-See also: [for loop](#for-loop).
+[bucle while]{#buclewhile} : Un bucle que sigue ejecutándose mientras alguna condición sea cierta. Véase también: [bucle for](#buclefor).
 
-[wildcard]{#wildcard}
-:   A character used in pattern matching.
-In the Unix shell,
-the wildcard `*` matches zero or more characters,
-so that `*.txt` matches all files whose names end in `.txt`.
+[wildcard]{#wildcard} : Carácter utilizado en la concordancia de patrones. En el shell Unix, el comodín `*` coincide con cero o más caracteres, de modo que `*.txt` coincide con todos los archivos cuyos nombres terminan en `.txt`.
 
-## External references
+## Referencias externas
 
-### Opening a terminal
+### Abrir un terminal
 
-- [How to Use Terminal on a Mac](https://www.macworld.co.uk/feature/mac-software/how-use-terminal-on-mac-3608274/)
-- [Git for Windows](https://git-for-windows.github.io/)
-- [How to Install Bash shell command-line tool on Windows 10](https://www.windowscentral.com/how-install-bash-shell-command-line-windows-10)
-- [Install and Use the Linux Bash Shell on Windows 10](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/)
-- [Using the Windows 10 Bash Shell](https://www.howtogeek.com/265900/everything-you-can-do-with-windows-10s-new-bash-shell/)
-- [Using a UNIX/Linux emulator (Cygwin) or Secure Shell (SSH) client (Putty)](https://faculty.smu.edu/reynolds/unixtut/windows.html)
+- [Cómo usar Terminal en un Mac](https://www.macworld.co.uk/feature/mac-software/how-use-terminal-on-mac-3608274/)
+- [Git para Windows](https://git-for-windows.github.io/)
+- [Cómo instalar la herramienta de línea de comandos Bash shell en Windows 10](https://www.windowscentral.com/how-install-bash-shell-command-line-windows-10)
+- [Instalación y uso de Linux Bash Shell en Windows 10](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/)
+- [Uso del Bash Shell de Windows 10](https://www.howtogeek.com/265900/everything-you-can-do-with-windows-10s-new-bash-shell/)
+- [Usando un emulador UNIX/Linux (Cygwin) o un cliente Secure Shell (SSH) (Putty)](https://faculty.smu.edu/reynolds/unixtut/windows.html)
 
-### Manuals
+### Manuales
 
-- [GNU manuals](https://www.gnu.org/manual/manual.html)
-- [Core GNU utilities](https://www.gnu.org/software/coreutils/manual/coreutils.html)
+- [Manuales GNU](https://www.gnu.org/manual/manual.html)
+- [Utilidades básicas de GNU](https://www.gnu.org/software/coreutils/manual/coreutils.html)
 
-### Miscellaneous
+### Varios
 
-- [North Pacific Gyre](https://en.wikipedia.org/wiki/North_Pacific_Gyre)
-- [Great Pacific Garbage Patch](https://en.wikipedia.org/wiki/Great_Pacific_Garbage_Patch)
-- ['Ensuring the longevity of digital information' by Jeff Rothenberg](https://www.clir.org/pubs/archives/ensuring.pdf)
-- [Computer error haikus](https://wiki.c2.com/?ComputerErrorHaiku)
-- [How to name files nicely, by Jenny Bryan](https://speakerdeck.com/jennybc/how-to-name-files)
+- [Giro del Pacífico Norte](https://en.wikipedia.org/wiki/North_Pacific_Gyre)
+- [Gran mancha de basura del Pacífico](https://en.wikipedia.org/wiki/Great_Pacific_Garbage_Patch)
+- ['Garantizar la longevidad de la información digital', por Jeff Rothenberg](https://www.clir.org/pubs/archives/ensuring.pdf)
+- [Haikus de errores informáticos](https://wiki.c2.com/?ComputerErrorHaiku)
+- [Cómo nombrar bien los archivos, por Jenny Bryan](https://speakerdeck.com/jennybc/how-to-name-files)
 
 

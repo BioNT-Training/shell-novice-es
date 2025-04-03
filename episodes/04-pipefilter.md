@@ -1,32 +1,27 @@
 ---
-title: Pipes and Filters
+title: Tuberías y filtros
 teaching: 25
 exercises: 10
 ---
 
+
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain the advantage of linking commands with pipes and filters.
-- Combine sequences of commands to get new output
-- Redirect a command's output to a file.
-- Explain what usually happens if a program or pipeline isn't given any input to process.
+- Explica la ventaja de enlazar comandos con tuberías y filtros.
+- Combina secuencias de comandos para obtener una nueva salida
+- Redirige la salida de un comando a un archivo.
+- Explica qué ocurre normalmente si un programa o una tubería no recibe ninguna entrada para procesar.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- How can I combine existing commands to produce a desired output?
-- How can I show only part of the output? 
+- ¿Cómo puedo combinar comandos existentes para producir una salida deseada?
+- ¿Cómo puedo mostrar sólo una parte de la salida?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Now that we know a few basic commands,
-we can finally look at the shell's most powerful feature:
-the ease with which it lets us combine existing programs in new ways.
-We'll start with the directory `shell-lesson-data/exercise-data/alkanes`
-that contains six files describing some simple organic molecules.
-The `.pdb` extension indicates that these files are in Protein Data Bank format,
-a simple text format that specifies the type and position of each atom in the molecule.
+Ahora que ya conocemos algunos comandos básicos, por fin podemos echar un vistazo a la característica más poderosa del shell: la facilidad con la que nos permite combinar programas existentes de nuevas formas. Empezaremos con el directorio `shell-lesson-data/exercise-data/alkanes` que contiene seis archivos que describen algunas moléculas orgánicas simples. La extensión `.pdb` indica que estos archivos están en formato Protein Data Bank, un formato de texto simple que especifica el tipo y la posición de cada átomo en la molécula.
 
 ```bash
 $ ls
@@ -37,7 +32,7 @@ cubane.pdb    methane.pdb    pentane.pdb
 ethane.pdb    octane.pdb     propane.pdb
 ```
 
-Let's run an example command:
+Vamos a ejecutar un comando de ejemplo:
 
 ```bash
 $ wc cubane.pdb
@@ -47,12 +42,9 @@ $ wc cubane.pdb
 20  156 1158 cubane.pdb
 ```
 
-`wc` is the 'word count' command:
-it counts the number of lines, words, and characters in files (returning the values
-in that order from left to right).
+`wc` es el comando 'word count': cuenta el número de líneas, palabras y caracteres en ficheros (devolviendo los valores en ese orden de izquierda a derecha).
 
-If we run the command `wc *.pdb`, the `*` in `*.pdb` matches zero or more characters,
-so the shell turns `*.pdb` into a list of all `.pdb` files in the current directory:
+Si ejecutamos el comando `wc *.pdb`, el `*` en `*.pdb` coincide con cero o más caracteres, por lo que el shell convierte `*.pdb` en una lista de todos los ficheros `.pdb` en el directorio actual:
 
 ```bash
 $ wc *.pdb
@@ -68,10 +60,9 @@ $ wc *.pdb
  107  819  6081  total
 ```
 
-Note that `wc *.pdb` also shows the total number of all lines in the last line of the output.
+Observe que `wc *.pdb` también muestra el número total de todas las líneas en la última línea de la salida.
 
-If we run `wc -l` instead of just `wc`,
-the output shows only the number of lines per file:
+Si ejecutamos `wc -l` en lugar de sólo `wc`, la salida muestra sólo el número de líneas por fichero:
 
 ```bash
 $ wc -l *.pdb
@@ -87,52 +78,36 @@ $ wc -l *.pdb
  107  total
 ```
 
-The `-m` and `-w` options can also be used with the `wc` command to show
-only the number of characters or the number of words, respectively.
+Las opciones `-m` y `-w` también pueden usarse con el comando `wc` para mostrar sólo el número de caracteres o el número de palabras, respectivamente.
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+::::::::::::::::::::::::::::::::::::::::: callout
 
-## Why Isn't It Doing Anything?
+## ¿Por qué no hace nada?
 
-What happens if a command is supposed to process a file, but we
-don't give it a filename? For example, what if we type:
+¿Qué pasa si un comando debe procesar un fichero, pero no le damos un nombre de fichero? Por ejemplo, ¿qué pasa si escribimos:
 
 ```bash
 $ wc -l
 ```
 
-but don't type `*.pdb` (or anything else) after the command?
-Since it doesn't have any filenames, `wc` assumes it is supposed to
-process input given at the command prompt, so it just sits there and waits
-for us to give it some data interactively. From the outside, though, all we
-see is it sitting there, and the command doesn't appear to do anything.
+pero no escribe `*.pdb` (ni nada más) después del comando? Dado que no tiene ningún nombre de archivo, `wc` asume que se supone que debe procesar la entrada dada en el símbolo del sistema, por lo que simplemente se sienta allí y espera a que le demos algunos datos de forma interactiva. Desde el exterior, sin embargo, todo lo que vemos es que se sienta allí, y el comando no parece hacer nada.
 
-If you make this kind of mistake, you can escape out of this state by
-holding down the control key (<kbd>Ctrl</kbd>) and pressing the letter
-<kbd>C</kbd> once: <kbd>Ctrl</kbd>\+<kbd>C</kbd>. Then release both keys.
+Si comete este tipo de error, puede salir de este estado manteniendo pulsada la tecla control (<kbd>Ctrl</kbd>) y pulsando la letra <kbd>C</kbd> una vez: <kbd>Ctrl</kbd>\+<kbd>C</kbd>. A continuación, suelta ambas teclas.
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Capturing output from commands
+## Capturando la salida de los comandos
 
-Which of these files contains the fewest lines?
-It's an easy question to answer when there are only six files,
-but what if there were 6000?
-Our first step toward a solution is to run the command:
+¿Cuál de estos ficheros contiene menos líneas? Es una pregunta fácil de responder cuando sólo hay seis ficheros, pero ¿y si hubiera 6000? Nuestro primer paso hacia la solución es ejecutar el comando
 
 ```bash
 $ wc -l *.pdb > lengths.txt
 ```
 
-The greater than symbol, `>`, tells the shell to **redirect** the command's output to a
-file instead of printing it to the screen. This command prints no screen output, because
-everything that `wc` would have printed has gone into the file `lengths.txt` instead.
-If the file doesn't exist prior to issuing the command, the shell will create the file.
-If the file exists already, it will be silently overwritten, which may lead to data loss.
-Thus, **redirect** commands require caution.
+El símbolo mayor que, `>`, indica al shell que **redirija** la salida del comando a un fichero en lugar de imprimirla en pantalla. Este comando no imprime ninguna salida en pantalla, porque todo lo que `wc` hubiera impreso ha ido al fichero `lengths.txt` en su lugar. Si el archivo no existe antes de emitir el comando, el shell creará el archivo. Si el archivo ya existe, se sobrescribirá silenciosamente, lo que puede provocar la pérdida de datos. Por lo tanto, los comandos **redirigir** requieren precaución.
 
-`ls lengths.txt` confirms that the file exists:
+`ls lengths.txt` confirma que el archivo existe:
 
 ```bash
 $ ls lengths.txt
@@ -142,11 +117,7 @@ $ ls lengths.txt
 lengths.txt
 ```
 
-We can now send the content of `lengths.txt` to the screen using `cat lengths.txt`.
-The `cat` command gets its name from 'concatenate' i.e. join together,
-and it prints the contents of files one after another.
-There's only one file in this case,
-so `cat` just shows us what it contains:
+Ahora podemos enviar el contenido de `lengths.txt` a la pantalla usando `cat lengths.txt`. El comando `cat` recibe su nombre de 'concatenar', es decir, unir, e imprime el contenido de los ficheros uno tras otro. En este caso sólo hay un fichero, así que `cat` sólo nos muestra lo que contiene:
 
 ```bash
 $ cat lengths.txt
@@ -162,30 +133,24 @@ $ cat lengths.txt
  107  total
 ```
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+::::::::::::::::::::::::::::::::::::::::: callout
 
-## Output Page by Page
+## Salida Página por Página
 
-We'll continue to use `cat` in this lesson, for convenience and consistency,
-but it has the disadvantage that it always dumps the whole file onto your screen.
-More useful in practice is the command `less` (e.g. `less lengths.txt`).
-This displays a screenful of the file, and then stops.
-You can go forward one screenful by pressing the spacebar,
-or back one by pressing `b`.  Press `q` to quit.
+Continuaremos usando `cat` en esta lección, por conveniencia y consistencia, pero tiene la desventaja de que siempre vuelca todo el fichero en la pantalla. Más útil en la práctica es el comando `less` (por ejemplo `less lengths.txt`). Esto muestra un pantallazo del archivo, y luego se detiene. Puedes avanzar una pantalla pulsando la barra espaciadora, o retroceder una pulsando `b`. Pulsa `q` para salir.
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Filtering output
+## Filtrar salida
 
-Next we'll use the `sort` command to sort the contents of the `lengths.txt` file.
-But first we'll do an exercise to learn a little about the sort command:
+A continuación usaremos el comando `sort` para ordenar el contenido del archivo `lengths.txt`. Pero primero haremos un ejercicio para aprender un poco sobre el comando sort:
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+::::::::::::::::::::::::::::::::::::::: challenge
 
-## What Does `sort -n` Do?
+## ¿Qué hace `sort -n`?
 
-The file `shell-lesson-data/exercise-data/numbers.txt` contains the following lines:
+El fichero `shell-lesson-data/exercise-data/numbers.txt` contiene las siguientes líneas:
 
 ```source
 10
@@ -195,7 +160,7 @@ The file `shell-lesson-data/exercise-data/numbers.txt` contains the following li
 6
 ```
 
-If we run `sort` on this file, the output is:
+Si ejecutamos `sort` en este fichero, la salida es:
 
 ```output
 10
@@ -205,7 +170,7 @@ If we run `sort` on this file, the output is:
 6
 ```
 
-If we run `sort -n` on the same file, we get this instead:
+Si ejecutamos `sort -n` en el mismo fichero, obtenemos esto en su lugar:
 
 ```output
 2
@@ -215,13 +180,13 @@ If we run `sort -n` on the same file, we get this instead:
 22
 ```
 
-Explain why `-n` has this effect.
+Explica por qué `-n` tiene este efecto.
 
-:::::::::::::::  solution
+::::::::::::::: solution
 
-## Solution
+## Solución
 
-The `-n` option specifies a numerical rather than an alphanumerical sort.
+La opción `-n` especifica una ordenación numérica en lugar de alfanumérica.
 
 
 
@@ -229,10 +194,7 @@ The `-n` option specifies a numerical rather than an alphanumerical sort.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-We will also use the `-n` option to specify that the sort is
-numerical instead of alphanumerical.
-This does *not* change the file;
-instead, it sends the sorted result to the screen:
+También usaremos la opción `-n` para especificar que la ordenación sea numérica en lugar de alfanumérica. Esto *no* cambia el fichero, sino que envía el resultado ordenado a la pantalla:
 
 ```bash
 $ sort -n lengths.txt
@@ -248,11 +210,7 @@ $ sort -n lengths.txt
 107  total
 ```
 
-We can put the sorted list of lines in another temporary file called `sorted-lengths.txt`
-by putting `> sorted-lengths.txt` after the command,
-just as we used `> lengths.txt` to put the output of `wc` into `lengths.txt`.
-Once we've done that,
-we can run another command called `head` to get the first few lines in `sorted-lengths.txt`:
+Podemos poner la lista ordenada de líneas en otro fichero temporal llamado `sorted-lengths.txt` poniendo `> sorted-lengths.txt` después del comando, igual que usamos `> lengths.txt` para poner la salida de `wc` en `lengths.txt`. Una vez hecho esto, podemos ejecutar otro comando llamado `head` para obtener las primeras líneas en `sorted-lengths.txt`:
 
 ```bash
 $ sort -n lengths.txt > sorted-lengths.txt
@@ -263,40 +221,28 @@ $ head -n 1 sorted-lengths.txt
   9  methane.pdb
 ```
 
-Using `-n 1` with `head` tells it that
-we only want the first line of the file;
-`-n 20` would get the first 20,
-and so on.
-Since `sorted-lengths.txt` contains the lengths of our files ordered from least to greatest,
-the output of `head` must be the file with the fewest lines.
+Usar `-n 1` con `head` le dice que sólo queremos la primera línea del fichero; `-n 20` obtendría las 20 primeras, y así sucesivamente. Como `sorted-lengths.txt` contiene las longitudes de nuestros ficheros ordenadas de menor a mayor, la salida de `head` debe ser el fichero con menos líneas.
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+::::::::::::::::::::::::::::::::::::::::: callout
 
-## Redirecting to the same file
+## Redireccionando al mismo fichero
 
-It's a very bad idea to try redirecting
-the output of a command that operates on a file
-to the same file. For example:
+Es una muy mala idea intentar redirigir la salida de un comando que opera sobre un fichero al mismo fichero. Por ejemplo:
 
 ```bash
 $ sort -n lengths.txt > lengths.txt
 ```
 
-Doing something like this may give you
-incorrect results and/or delete
-the contents of `lengths.txt`.
+Hacer algo como esto puede darte resultados incorrectos y/o borrar el contenido de `lengths.txt`.
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+::::::::::::::::::::::::::::::::::::::: challenge
 
-## What Does `>>` Mean?
+## ¿Qué significa `>>`?
 
-We have seen the use of `>`, but there is a similar operator `>>`
-which works slightly differently.
-We'll learn about the differences between these two operators by printing some strings.
-We can use the `echo` command to print strings e.g.
+Hemos visto el uso de `>`, pero existe un operador similar `>>` que funciona de forma ligeramente diferente. Aprenderemos las diferencias entre estos dos operadores imprimiendo algunas cadenas. Podemos utilizar el comando `echo` para imprimir cadenas, por ejemplo
 
 ```bash
 $ echo The echo command prints text
@@ -306,31 +252,27 @@ $ echo The echo command prints text
 The echo command prints text
 ```
 
-Now test the commands below to reveal the difference between the two operators:
+Ahora prueba los comandos de abajo para revelar la diferencia entre los dos operadores:
 
 ```bash
 $ echo hello > testfile01.txt
 ```
 
-and:
+y:
 
 ```bash
 $ echo hello >> testfile02.txt
 ```
 
-Hint: Try executing each command twice in a row and then examining the output files.
+Sugerencia: Intenta ejecutar cada comando dos veces seguidas y luego examina los archivos de salida.
 
-:::::::::::::::  solution
+::::::::::::::: solution
 
-## Solution
+## Solución
 
-In the first example with `>`, the string 'hello' is written to `testfile01.txt`,
-but the file gets overwritten each time we run the command.
+En el primer ejemplo con `>`, la cadena 'hola' se escribe en `testfile01.txt`, pero el fichero se sobreescribe cada vez que ejecutamos el comando.
 
-We see from the second example that the `>>` operator also writes 'hello' to a file
-(in this case `testfile02.txt`),
-but appends the string to the file if it already exists
-(i.e. when we run it for the second time).
+Vemos en el segundo ejemplo que el operador `>>` también escribe 'hola' en un fichero (en este caso `testfile02.txt`), pero añade la cadena al fichero si ya existe (es decir, cuando lo ejecutamos por segunda vez).
 
 
 
@@ -338,36 +280,29 @@ but appends the string to the file if it already exists
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+::::::::::::::::::::::::::::::::::::::: challenge
 
-## Appending Data
+## Añadiendo datos
 
-We have already met the `head` command, which prints lines from the start of a file.
-`tail` is similar, but prints lines from the end of a file instead.
+Ya hemos conocido el comando `head`, que imprime líneas desde el principio de un fichero. el comando `tail` es similar, pero imprime líneas desde el final del fichero.
 
-Consider the file `shell-lesson-data/exercise-data/animal-counts/animals.csv`.
-After these commands, select the answer that
-corresponds to the file `animals-subset.csv`:
+Considera el fichero `shell-lesson-data/exercise-data/animal-counts/animals.csv`. Después de estos comandos, seleccione la respuesta que corresponde al fichero `animals-subset.csv`:
 
 ```bash
 $ head -n 3 animals.csv > animals-subset.csv
 $ tail -n 2 animals.csv >> animals-subset.csv
 ```
 
-1. The first three lines of `animals.csv`
-2. The last two lines of `animals.csv`
-3. The first three lines and the last two lines of `animals.csv`
-4. The second and third lines of `animals.csv`
+1. Las tres primeras líneas de `animals.csv`
+2. Las dos últimas líneas de `animals.csv` son
+3. Las tres primeras líneas y las dos últimas líneas de `animals.csv`
+4. La segunda y la tercera línea de `animals.csv`
 
-:::::::::::::::  solution
+::::::::::::::: solution
 
-## Solution
+## Solución
 
-Option 3 is correct.
-For option 1 to be correct we would only run the `head` command.
-For option 2 to be correct we would only run the `tail` command.
-For option 4 to be correct we would have to pipe the output of `head` into `tail -n 2`
-by doing `head -n 3 animals.csv | tail -n 2 > animals-subset.csv`
+La opción 3 es correcta. Para que la opción 1 sea correcta sólo ejecutaríamos el comando `head`. Para que la opción 2 sea correcta sólo ejecutaríamos el comando `tail`. Para que la opción 4 sea correcta tendríamos que pasar la salida de `head` a `tail -n 2` haciendo `head -n 3 animals.csv | tail -n 2 > animals-subset.csv`
 
 
 
@@ -375,14 +310,9 @@ by doing `head -n 3 animals.csv | tail -n 2 > animals-subset.csv`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Passing output to another command
+## Pasando la salida a otro comando
 
-In our example of finding the file with the fewest lines,
-we are using two intermediate files `lengths.txt` and `sorted-lengths.txt` to store output.
-This is a confusing way to work because
-even once you understand what `wc`, `sort`, and `head` do,
-those intermediate files make it hard to follow what's going on.
-We can make it easier to understand by running `sort` and `head` together:
+En nuestro ejemplo de encontrar el fichero con menos líneas, estamos usando dos ficheros intermedios `lengths.txt` y `sorted-lengths.txt` para almacenar la salida. Esta es una forma confusa de trabajar porque incluso una vez que entiendes lo que hacen `wc`, `sort`, y `head`, esos ficheros intermedios hacen difícil seguir lo que está pasando. Podemos hacerlo más fácil de entender ejecutando `sort` y `head` juntos:
 
 ```bash
 $ sort -n lengths.txt | head -n 1
@@ -392,21 +322,15 @@ $ sort -n lengths.txt | head -n 1
   9  methane.pdb
 ```
 
-The vertical bar, `|`, between the two commands is called a **pipe**.
-It tells the shell that we want to use
-the output of the command on the left
-as the input to the command on the right.
+La barra vertical, `|`, entre los dos comandos se llama **pipa**. Le dice al shell que queremos usar la salida del comando de la izquierda como entrada para el comando de la derecha.
 
-This has removed the need for the `sorted-lengths.txt` file.
+Esto ha eliminado la necesidad del archivo `sorted-lengths.txt`.
 
-## Combining multiple commands
+## Combinando múltiples comandos
 
-Nothing prevents us from chaining pipes consecutively.
-We can for example send the output of `wc` directly to `sort`,
-and then send the resulting output to `head`.
-This removes the need for any intermediate files.
+Nada nos impide encadenar tuberías consecutivamente. Podemos, por ejemplo, enviar la salida de `wc` directamente a `sort`, y luego enviar la salida resultante a `head`. Esto elimina la necesidad de ficheros intermedios.
 
-We'll start by using a pipe to send the output of `wc` to `sort`:
+Empezaremos usando una tubería para enviar la salida de `wc` a `sort`:
 
 ```bash
 $ wc -l *.pdb | sort -n
@@ -422,7 +346,7 @@ $ wc -l *.pdb | sort -n
  107 total
 ```
 
-We can then send that output through another pipe, to `head`, so that the full pipeline becomes:
+Podemos entonces enviar esa salida a través de otra tubería, a `head`, de modo que la tubería completa se convierte en:
 
 ```bash
 $ wc -l *.pdb | sort -n | head -n 1
@@ -432,36 +356,28 @@ $ wc -l *.pdb | sort -n | head -n 1
    9  methane.pdb
 ```
 
-This is exactly like a mathematician nesting functions like *log(3x)*
-and saying 'the log of three times *x*'.
-In our case,
-the algorithm is 'head of sort of line count of `*.pdb`'.
+Esto es exactamente como si un matemático anidara funciones como *log(3x)* y dijera 'el logaritmo de tres veces *x*'. En nuestro caso, el algoritmo es 'cabeza de ordenación del recuento de líneas de `*.pdb`'.
 
-The redirection and pipes used in the last few commands are illustrated below:
+La redirección y las tuberías utilizadas en los últimos comandos se ilustran a continuación:
 
-![](fig/redirects-and-pipes.svg){alt='Redirects and Pipes of different commands: "wc -l \*.pdb" will direct theoutput to the shell. "wc -l \*.pdb > lengths" will direct output to the file"lengths". "wc -l \*.pdb | sort -n | head -n 1" will build a pipeline where theoutput of the "wc" command is the input to the "sort" command, the output ofthe "sort" command is the input to the "head" command and the output of the"head" command is directed to the shell'}
+![](fig/redirects-and-pipes.svg){alt='Redirecciones y tuberías de diferentes comandos: "wc -l \*.pdb" dirigirá la salida al shell. "wc -l \*.pdb > longitudes" dirigirá la salida al archivo "longitudes". "wc -l \*.pdb | sort -n | head -n 1" creará un canal en el que la salida del comando "wc" es la entrada del comando "sort", la salida del comando "sort" es la entrada del comando "head" y la salida del comando "head" se dirige al intérprete de órdenes'}
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+::::::::::::::::::::::::::::::::::::::: challenge
 
-## Piping Commands Together
+## Uniendo comandos en tuberías
 
-In our current directory, we want to find the 3 files which have the least number of
-lines. Which command listed below would work?
+En nuestro directorio actual, queremos encontrar los 3 archivos que tienen el menor número de líneas. ¿Qué comando de los que aparecen a continuación funcionaría?
 
 1. `wc -l * > sort -n > head -n 3`
 2. `wc -l * | sort -n | head -n 1-3`
 3. `wc -l * | head -n 3 | sort -n`
 4. `wc -l * | sort -n | head -n 3`
 
-:::::::::::::::  solution
+::::::::::::::: solution
 
-## Solution
+## Solución
 
-Option 4 is the solution.
-The pipe character `|` is used to connect the output from one command to
-the input of another.
-`>` is used to redirect standard output to a file.
-Try it in the `shell-lesson-data/exercise-data/alkanes` directory!
+La opción 4 es la solución. El carácter `|` se utiliza para conectar la salida de un comando a la entrada de otro. el carácter `>` se utiliza para redirigir la salida estándar a un archivo. ¡Pruébalo en el directorio `shell-lesson-data/exercise-data/alkanes`!
 
 
 
@@ -469,34 +385,17 @@ Try it in the `shell-lesson-data/exercise-data/alkanes` directory!
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Tools designed to work together
+## Herramientas diseñadas para trabajar juntas
 
-This idea of linking programs together is why Unix has been so successful.
-Instead of creating enormous programs that try to do many different things,
-Unix programmers focus on creating lots of simple tools that each do one job well,
-and that work well with each other.
-This programming model is called 'pipes and filters'.
-We've already seen pipes;
-a **filter** is a program like `wc` or `sort`
-that transforms a stream of input into a stream of output.
-Almost all of the standard Unix tools can work this way.
-Unless told to do otherwise,
-they read from standard input,
-do something with what they've read,
-and write to standard output.
+Esta idea de enlazar programas es la razón por la que Unix ha tenido tanto éxito. En lugar de crear enormes programas que intentan hacer muchas cosas diferentes, los programadores de Unix se centran en crear un montón de herramientas simples que cada una hace bien un trabajo, y que funcionan bien entre sí. Este modelo de programación se denomina "tuberías y filtros". Ya hemos visto las tuberías; un **filtro** es un programa como `wc` o `sort` que transforma un flujo de entrada en un flujo de salida. Casi todas las herramientas estándar de Unix pueden trabajar de esta manera. A menos que se les indique lo contrario, leen de la entrada estándar, hacen algo con lo que han leído y escriben en la salida estándar.
 
-The key is that any program that reads lines of text from standard input
-and writes lines of text to standard output
-can be combined with every other program that behaves this way as well.
-You can *and should* write your programs this way
-so that you and other people can put those programs into pipes to multiply their power.
+La clave es que cualquier programa que lea líneas de texto de la entrada estándar y escriba líneas de texto en la salida estándar puede combinarse con cualquier otro programa que también se comporte de esta manera. Puedes *y debes* escribir tus programas de esta forma para que tú y otras personas podáis poner esos programas en tuberías para multiplicar su potencia.
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+::::::::::::::::::::::::::::::::::::::: challenge
 
-## Pipe Reading Comprehension
+## Comprensión de Lectura de Tuberías
 
-A file called `animals.csv` (in the `shell-lesson-data/exercise-data/animal-counts` folder)
-contains the following data:
+Un fichero llamado `animals.csv` (en la carpeta `shell-lesson-data/exercise-data/animal-counts`) contiene los siguientes datos:
 
 ```source
 2012-11-05,deer,5
@@ -509,25 +408,19 @@ contains the following data:
 2012-11-07,bear,1
 ```
 
-What text passes through each of the pipes and the final redirect in the pipeline below?
-Note, the `sort -r` command sorts in reverse order.
+¿Qué texto pasa a través de cada una de las tuberías y la redirección final en la tubería de abajo? Nota, el comando `sort -r` ordena en orden inverso.
 
 ```bash
 $ cat animals.csv | head -n 5 | tail -n 3 | sort -r > final.txt
 ```
 
-Hint: build the pipeline up one command at a time to test your understanding
+Pista: construye la tubería comando a comando para comprobar tu comprensión
 
-:::::::::::::::  solution
+::::::::::::::: solution
 
-## Solution
+## Solución
 
-The `head` command extracts the first 5 lines from `animals.csv`.
-Then, the last 3 lines are extracted from the previous 5 by using the `tail` command.
-With the `sort -r` command those 3 lines are sorted in reverse order.
-Finally, the output is redirected to a file: `final.txt`.
-The content of this file can be checked by executing `cat final.txt`.
-The file should contain the following lines:
+El comando `head` extrae las 5 primeras líneas de `animals.csv`. A continuación, se extraen las 3 últimas líneas de las 5 anteriores mediante el comando `tail`. Con el comando `sort -r` esas 3 líneas se ordenan en orden inverso. Finalmente, la salida se redirige a un fichero: `final.txt`. El contenido de este fichero puede comprobarse ejecutando `cat final.txt`. El fichero debería contener las siguientes líneas
 
 ```source
 2012-11-06,rabbit,19
@@ -539,22 +432,17 @@ The file should contain the following lines:
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+::::::::::::::::::::::::::::::::::::::: challenge
 
-## Pipe Construction
+## Construcción de tuberías
 
-For the file `animals.csv` from the previous exercise, consider the following command:
+Para el fichero `animals.csv` del ejercicio anterior, considera el siguiente comando:
 
 ```bash
 $ cut -d , -f 2 animals.csv
 ```
 
-The `cut` command is used to remove or 'cut out' certain sections of each line in the file,
-and `cut` expects the lines to be separated into columns by a <kbd>Tab</kbd> character.
-A character used in this way is called a **delimiter**.
-In the example above we use the `-d` option to specify the comma as our delimiter character.
-We have also used the `-f` option to specify that we want to extract the second field (column).
-This gives the following output:
+El comando `cut` se utiliza para eliminar o 'cortar' ciertas secciones de cada línea del fichero, y `cut` espera que las líneas estén separadas en columnas por un carácter <kbd>Tab</kbd>. Un carácter utilizado de esta forma se denomina **delimitador**. En el ejemplo anterior utilizamos la opción `-d` para especificar la coma como carácter delimitador. También hemos utilizado la opción `-f` para especificar que queremos extraer el segundo campo (columna). El resultado es el siguiente
 
 ```output
 deer
@@ -567,14 +455,11 @@ rabbit
 bear
 ```
 
-The `uniq` command filters out adjacent matching lines in a file.
-How could you extend this pipeline (using `uniq` and another command) to find
-out what animals the file contains (without any duplicates in their
-names)?
+El comando `uniq` filtra las líneas adyacentes coincidentes en un fichero. ¿Cómo podrías extender este conducto (usando `uniq` y otro comando) para averiguar qué animales contiene el fichero (sin duplicados en sus nombres)?
 
-:::::::::::::::  solution
+::::::::::::::: solution
 
-## Solution
+## Solución
 
 ```bash
 $ cut -d , -f 2 animals.csv | sort | uniq
@@ -584,11 +469,11 @@ $ cut -d , -f 2 animals.csv | sort | uniq
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+::::::::::::::::::::::::::::::::::::::: challenge
 
-## Which Pipe?
+## ¿Qué Tubería?
 
-The file `animals.csv` contains 8 lines of data formatted as follows:
+El fichero `animals.csv` contiene 8 líneas de datos formateadas de la siguiente manera:
 
 ```output
 2012-11-05,deer,5
@@ -598,11 +483,7 @@ The file `animals.csv` contains 8 lines of data formatted as follows:
 ...
 ```
 
-The `uniq` command has a `-c` option which gives a count of the
-number of times a line occurs in its input.  Assuming your current
-directory is `shell-lesson-data/exercise-data/animal-counts`,
-what command would you use to produce a table that shows
-the total count of each type of animal in the file?
+El comando `uniq` tiene una opción `-c` que proporciona un recuento del número de veces que una línea aparece en su entrada. Suponiendo que tu directorio actual es `shell-lesson-data/exercise-data/animal-counts`, ¿qué comando usarías para producir una tabla que muestre el recuento total de cada tipo de animal en el fichero?
 
 1. `sort animals.csv | uniq -c`
 2. `sort -t, -k2,2 animals.csv | uniq -c`
@@ -610,14 +491,11 @@ the total count of each type of animal in the file?
 4. `cut -d, -f 2 animals.csv | sort | uniq -c`
 5. `cut -d, -f 2 animals.csv | sort | uniq -c | wc -l`
 
-:::::::::::::::  solution
+::::::::::::::: solution
 
-## Solution
+## Solución
 
-Option 4. is the correct answer.
-If you have difficulty understanding why, try running the commands, or sub-sections of
-the pipelines (make sure you are in the `shell-lesson-data/exercise-data/animal-counts`
-directory).
+La opción 4. es la respuesta correcta. Si tienes dificultades para entender por qué, intenta ejecutar los comandos, o subsecciones de las tuberías (asegúrate de que estás en el directorio `shell-lesson-data/exercise-data/animal-counts`).
 
 
 
@@ -625,18 +503,16 @@ directory).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Nelle's Pipeline: Checking Files
+## Tubería de Nelle: Comprobación de archivos
 
-Nelle has run her samples through the assay machines
-and created 17 files in the `north-pacific-gyre` directory described earlier.
-As a quick check, starting from the `shell-lesson-data` directory, Nelle types:
+Nelle ha pasado sus muestras por las máquinas de ensayo y ha creado 17 archivos en el directorio `north-pacific-gyre` descrito anteriormente. Como comprobación rápida, partiendo del directorio `shell-lesson-data`, Nelle teclea:
 
 ```bash
 $ cd north-pacific-gyre
 $ wc -l *.txt
 ```
 
-The output is 18 lines that look like this:
+La salida son 18 líneas que tienen este aspecto:
 
 ```output
 300 NENE01729A.txt
@@ -648,7 +524,7 @@ The output is 18 lines that look like this:
 ... ...
 ```
 
-Now she types this:
+Ahora escribe esto:
 
 ```bash
 $ wc -l *.txt | sort -n | head -n 5
@@ -662,13 +538,7 @@ $ wc -l *.txt | sort -n | head -n 5
  300 NENE01751A.txt
 ```
 
-Whoops: one of the files is 60 lines shorter than the others.
-When she goes back and checks it,
-she sees that she did that assay at 8:00 on a Monday morning --- someone
-was probably in using the machine on the weekend,
-and she forgot to reset it.
-Before re-running that sample,
-she checks to see if any files have too much data:
+Ups: uno de los ficheros es 60 líneas más corto que los otros. Cuando vuelve y lo comprueba, ve que hizo ese ensayo a las 8:00 de un lunes por la mañana --- probablemente alguien estuvo usando la máquina el fin de semana, y se olvidó de reiniciarla. Antes de volver a ejecutar esa muestra, comprueba si algún archivo tiene demasiados datos:
 
 ```bash
 $ wc -l *.txt | sort -n | tail -n 5
@@ -682,11 +552,7 @@ $ wc -l *.txt | sort -n | tail -n 5
 5040 total
 ```
 
-Those numbers look good --- but what's that 'Z' doing there in the third-to-last line?
-All of her samples should be marked 'A' or 'B';
-by convention,
-her lab uses 'Z' to indicate samples with missing information.
-To find others like it, she does this:
+Esos números tienen buena pinta --- pero ¿qué hace esa 'Z' ahí en la antepenúltima línea? Todas sus muestras deberían estar marcadas con 'A' o 'B'; por convención, su laboratorio utiliza la 'Z' para indicar las muestras a las que les falta información. Para encontrar otras iguales, hace esto:
 
 ```bash
 $ ls *Z.txt
@@ -696,44 +562,27 @@ $ ls *Z.txt
 NENE01971Z.txt    NENE02040Z.txt
 ```
 
-Sure enough,
-when she checks the log on her laptop,
-there's no depth recorded for either of those samples.
-Since it's too late to get the information any other way,
-she must exclude those two files from her analysis.
-She could delete them using `rm`,
-but there are actually some analyses she might do later where depth doesn't matter,
-so instead, she'll have to be careful later on to select files using the wildcard expressions
-`NENE*A.txt NENE*B.txt`.
+Efectivamente, cuando comprueba el registro en su portátil, no hay ninguna profundidad registrada para ninguna de esas muestras. Como es demasiado tarde para obtener la información de otra forma, debe excluir esos dos archivos de su análisis. Podría eliminarlos utilizando `rm`, pero hay algunos análisis que podría hacer más adelante en los que la profundidad no importa, así que en su lugar, tendrá que tener cuidado más adelante para seleccionar los archivos utilizando las expresiones comodín `NENE*A.txt NENE*B.txt`.
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+::::::::::::::::::::::::::::::::::::::: challenge
 
-## Removing Unneeded Files
+## Eliminar archivos innecesarios
 
-Suppose you want to delete your processed data files, and only keep
-your raw files and processing script to save storage.
-The raw files end in `.dat` and the processed files end in `.txt`.
-Which of the following would remove all the processed data files,
-and *only* the processed data files?
+Supongamos que desea eliminar los archivos de datos procesados y conservar sólo los archivos sin procesar y el script de procesamiento para ahorrar espacio. Los archivos sin procesar terminan en `.dat` y los archivos procesados terminan en `.txt`. ¿Cuál de las siguientes opciones eliminaría todos los ficheros de datos procesados, y *sólo* los ficheros de datos procesados?
 
 1. `rm ?.txt`
 2. `rm *.txt`
 3. `rm * .txt`
 4. `rm *.*`
 
-:::::::::::::::  solution
+::::::::::::::: solution
 
-## Solution
+## Solución
 
-1. This would remove `.txt` files with one-character names
-2. This is the correct answer
-3. The shell would expand `*` to match everything in the current directory,
-  so the command would try to remove all matched files and an additional
-  file called `.txt`
-4. The shell expands `*.*` to match all filenames containing at least one
-  `.`, including the processed files (`.txt`) *and* raw files (`.dat`)
-  
-  
+1. Esto eliminaría los archivos `.txt` con nombres de un carácter
+2. Esta es la respuesta correcta
+3. El shell expandiría `*` para coincidir con todo lo que hay en el directorio actual, por lo que el comando intentaría eliminar todos los ficheros coincidentes y un fichero adicional llamado `.txt`
+4. El shell expande `*.*` para que coincida con todos los nombres de fichero que contengan al menos un `.`, incluyendo los ficheros procesados (`.txt`) *y* los ficheros sin procesar (`.dat`)
 
 :::::::::::::::::::::::::
 
@@ -743,16 +592,17 @@ and *only* the processed data files?
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- `wc` counts lines, words, and characters in its inputs.
-- `cat` displays the contents of its inputs.
-- `sort` sorts its inputs.
-- `head` displays the first 10 lines of its input by default without additional arguments.
-- `tail` displays the last 10 lines of its input by default without additional arguments.
-- `command > [file]` redirects a command's output to a file (overwriting any existing content).
-- `command >> [file]` appends a command's output to a file.
-- `[first] | [second]` is a pipeline: the output of the first command is used as the input to the second.
-- The best way to use the shell is to use pipes to combine simple single-purpose programs (filters).
+- `wc` cuenta líneas, palabras y caracteres en sus entradas.
+- `cat` muestra el contenido de sus entradas.
+- `sort` ordena sus entradas.
+- `head` muestra por defecto las 10 primeras líneas de su entrada sin argumentos adicionales.
+- `tail` muestra por defecto las 10 últimas líneas de su entrada sin argumentos adicionales.
+- `command > [file]` redirige la salida de un comando a un archivo (sobreescribiendo cualquier contenido existente).
+- `command >> [file]` añade la salida de un comando a un archivo.
+- `[first] | [second]` es una tubería: la salida del primer comando se usa como entrada del segundo.
+- La mejor manera de usar el shell es usar tuberías para combinar programas simples de un solo propósito (filtros).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 
