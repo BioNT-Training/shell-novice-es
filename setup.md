@@ -1,47 +1,37 @@
 ---
-title: Setup
+title: Configuración
 ---
 
-## Download files
 
-You need to download some files to follow this lesson.
+## Descargar archivos
 
-1. Download [shell-lesson-data.zip][zip-file] and move the file to your Desktop.
-2. Unzip/extract the file.
-  **Let your instructor know if you need help with this step**.
-  You should end up with a new folder called **`shell-lesson-data`** on your Desktop.
+Necesitas descargar algunos archivos para seguir esta lección.
 
-## Install software
+1. Descarga [shell-lesson-data.zip][archivo zip] y mueve el archivo a tu Escritorio.
+2. Descomprime/extrae el archivo. **Haga saber a su instructor si necesita ayuda con este paso**. Deberías terminar con una nueva carpeta llamada **`shell-lesson-data`** en tu Escritorio.
 
-If you do not already have the shell software installed, you will need to
-[download and install][install_shell] it.
+## Instalar software
 
-## Open a new shell
+Si aún no tiene instalado el software de shell, deberá [descargarlo e instalarlo][install_shell].
 
-After installing the software
+## Abrir una nueva shell
 
-3. Open a terminal.
-  If you're not sure how to open a terminal on your operating system, see the instructions below.
-4. In the terminal type `cd` then press the <kbd>Return</kbd> key.
-  This step will make sure you start with your home folder as your working directory.
+Después de instalar el software
 
-In the lesson, you will find out how to access the data files in this folder.
+3. Abre un terminal. Si no estás seguro de cómo abrir un terminal en tu sistema operativo, consulta las siguientes instrucciones.
+4. En el terminal escriba `cd` y pulse la tecla <kbd>Return</kbd>. Este paso asegurará que empieces con tu carpeta de inicio como directorio de trabajo.
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+En la lección, descubrirás cómo acceder a los archivos de datos de esta carpeta.
 
-## Where to type commands: How to open a new shell
+::::::::::::::::::::::::::::::::::::::::: callout
 
-The shell is a program that enables us to send commands to the computer and receive output.
-It is also referred to as the terminal or command line.
+## Dónde escribir comandos: Cómo abrir un nuevo shell
 
-Some computers include a default Unix Shell program.
-The steps below describe some methods for identifying and opening
-a Unix Shell program if you already have one installed.
-There are also options for identifying and downloading a Unix Shell program,
-a Linux/UNIX emulator, or a program to access a Unix Shell on a server.
+El shell es un programa que nos permite enviar comandos al ordenador y recibir salida. También se conoce como terminal o línea de comandos.
 
-If none of the options below address your circumstances,
-try an online search for: Unix shell [your computer model] [your operating system].
+Algunos ordenadores incluyen un programa Unix Shell por defecto. Los pasos siguientes describen algunos métodos para identificar y abrir un programa Unix Shell si ya tiene uno instalado. También hay opciones para identificar y descargar un programa Unix Shell, un emulador Linux/UNIX o un programa para acceder a un Unix Shell en un servidor.
+
+Si ninguna de las opciones siguientes se ajusta a sus circunstancias, intente una búsqueda en línea de: Unix shell [tu modelo de ordenador] [tu sistema operativo].
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -50,21 +40,15 @@ try an online search for: Unix shell [your computer model] [your operating syste
 
 ### Windows {#windows}
 
-Computers with Windows operating systems do not automatically have a Unix Shell program
-installed.
-In this lesson, we encourage you to use an emulator included in [Git for Windows][install_shell],
-which gives you access to both Bash shell commands and Git.
+Los ordenadores con sistemas operativos Windows no tienen instalado automáticamente un programa Unix Shell. En esta lección, te animamos a utilizar un emulador incluido en [Git para Windows][install_shell], que te da acceso tanto a los comandos del shell Bash como a Git.
 
-Once installed, you can open a terminal by running the program Git Bash from the Windows start
-menu.
+Una vez instalado, puede abrir un terminal ejecutando el programa Git Bash desde el menú de inicio de Windows.
 
-**For advanced users:**
+**Para usuarios avanzados:**
 
-As an alternative to Git for Windows you may wish to [Install the Windows Subsystem for Linux][wsl]
-which gives access to a Bash shell command-line tool in Windows 10 and above.
+Como alternativa a Git para Windows puede que desee [Instalar el Subsistema de Windows para Linux][wsl] que da acceso a una herramienta de línea de comandos de shell Bash en Windows 10 y superior.
 
-Please note that commands in the Windows Subsystem for Linux (WSL) may differ slightly
-from those shown in the lesson or presented in the workshop.
+Tenga en cuenta que los comandos del Subsistema Windows para Linux (WSL) pueden diferir ligeramente de los mostrados en la lección o presentados en el taller.
 
 ::::::::::::
 
@@ -72,24 +56,18 @@ from those shown in the lesson or presented in the workshop.
 
 ### MacOS {#macos}
 
-For a Mac computer running macOS Mojave or earlier releases, the default Unix Shell is Bash.
-For a Mac computer running macOS Catalina or later releases, the default Unix Shell is Zsh.
-Your default shell is available via the Terminal program within your Utilities folder.
+Para un ordenador Mac que ejecute macOS Mojave o versiones anteriores, el shell Unix predeterminado es Bash. Para un ordenador Mac que ejecute macOS Catalina o versiones posteriores, el shell Unix predeterminado es Zsh. Su shell predeterminado está disponible a través del programa Terminal dentro de su carpeta Utilidades.
 
-To open Terminal, try one or both of the following:
+Para abrir Terminal, pruebe una o ambas de las siguientes opciones:
 
-- In Finder, select the Go menu, then select Utilities.
-  Locate Terminal in the Utilities folder and open it.
-- Use the Mac 'Spotlight' computer search function.
-  Search for: `Terminal` and press <kbd>Return</kbd>.
+- En Finder, selecciona el menú Ir y, a continuación, Utilidades. Localice Terminal en la carpeta Utilidades y ábrala.
+- Utiliza la función de búsqueda de ordenadores 'Spotlight' de Mac. Busca por: `Terminal` y pulse <kbd>Return</kbd>.
 
-To check if your machine is set up to use something other than Bash,
-type `echo $SHELL` in your terminal window.
+Para comprobar si su máquina está configurada para utilizar algo distinto de Bash, escriba `echo $SHELL` en la ventana de su terminal.
 
-If your machine is set up to use something other than Bash,
-you can run it by opening a terminal and typing `bash`.
+Si su máquina está configurada para utilizar algo distinto de Bash, puede ejecutarlo abriendo un terminal y escribiendo `bash`.
 
-[How to Use Terminal on a Mac][mac-terminal]
+[Cómo usar Terminal en un Mac][mac-terminal]
 
 ::::::::::::
 
@@ -97,12 +75,7 @@ you can run it by opening a terminal and typing `bash`.
 
 ### Linux {#linux}
 
-The default Unix Shell for Linux operating systems is usually Bash.
-On most versions of Linux, it is accessible by running the
-[Gnome Terminal][gnome-terminal] or [KDE Konsole][kde-konsole] or [xterm],
-which can be found via the applications menu or the search bar.
-If your machine is set up to use something other than Bash,
-you can run it by opening a terminal and typing `bash`.
+El shell Unix por defecto de los sistemas operativos Linux suele ser Bash. En la mayoría de las versiones de Linux, es accesible ejecutando [Gnome Terminal][gnome-terminal] o [KDE Konsole][kde-konsole] o [xterm], que se pueden encontrar a través del menú de aplicaciones o la barra de búsqueda. Si su máquina está configurada para utilizar algo distinto de Bash, puede ejecutarlo abriendo un terminal y escribiendo `bash`.
 
 ::::::::::::
 
@@ -113,6 +86,7 @@ you can run it by opening a terminal and typing `bash`.
 [gnome-terminal]: https://help.gnome.org/users/gnome-terminal/stable/
 [kde-konsole]: https://konsole.kde.org/
 [xterm]: https://en.wikipedia.org/wiki/Xterm
+
 
 
 
