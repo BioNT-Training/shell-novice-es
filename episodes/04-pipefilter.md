@@ -1,5 +1,5 @@
 ---
-title: Tuberías y filtros
+title: Pipes y filtros
 teaching: 25
 exercises: 10
 ---
@@ -7,10 +7,10 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Explica la ventaja de enlazar comandos con tuberías y filtros.
+- Explica la ventaja de enlazar comandos con pipes y filtros.
 - Combina secuencias de comandos para obtener una nueva salida
 - Redirige la salida de un comando a un archivo.
-- Explica qué ocurre normalmente si un programa o una tubería no recibe ninguna entrada para procesar.
+- Explica qué ocurre normalmente si un programa o una pipe no recibe ninguna entrada para procesar.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -322,15 +322,15 @@ $ sort -n lengths.txt | head -n 1
   9  methane.pdb
 ```
 
-La barra vertical, `|`, entre los dos comandos se llama **pipa**. Le dice al shell que queremos usar la salida del comando de la izquierda como entrada para el comando de la derecha.
+La barra vertical, `|`, entre los dos comandos se llama **pipe**. Le dice al shell que queremos usar la salida del comando de la izquierda como entrada para el comando de la derecha.
 
 Esto ha eliminado la necesidad del archivo `sorted-lengths.txt`.
 
 ## Combinando múltiples comandos
 
-Nada nos impide encadenar tuberías consecutivamente. Podemos, por ejemplo, enviar la salida de `wc` directamente a `sort`, y luego enviar la salida resultante a `head`. Esto elimina la necesidad de ficheros intermedios.
+Nada nos impide encadenar pipes consecutivamente. Podemos, por ejemplo, enviar la salida de `wc` directamente a `sort`, y luego enviar la salida resultante a `head`. Esto elimina la necesidad de ficheros intermedios.
 
-Empezaremos usando una tubería para enviar la salida de `wc` a `sort`:
+Empezaremos usando una pipe para enviar la salida de `wc` a `sort`:
 
 ```bash
 $ wc -l *.pdb | sort -n
@@ -346,7 +346,7 @@ $ wc -l *.pdb | sort -n
  107 total
 ```
 
-Podemos entonces enviar esa salida a través de otra tubería, a `head`, de modo que la tubería completa se convierte en:
+Podemos entonces enviar esa salida a través de otra pipe, a `head`, de modo que la pipe completa se convierte en:
 
 ```bash
 $ wc -l *.pdb | sort -n | head -n 1
@@ -358,13 +358,13 @@ $ wc -l *.pdb | sort -n | head -n 1
 
 Esto es exactamente como si un matemático anidara funciones como *log(3x)* y dijera 'el logaritmo de tres veces *x*'. En nuestro caso, el algoritmo es 'cabeza de ordenación del recuento de líneas de `*.pdb`'.
 
-La redirección y las tuberías utilizadas en los últimos comandos se ilustran a continuación:
+La redirección y las pipes utilizadas en los últimos comandos se ilustran a continuación:
 
-![](fig/redirects-and-pipes.svg){alt='Redirecciones y tuberías de diferentes comandos: "wc -l \*.pdb" dirigirá la salida al shell. "wc -l \*.pdb > longitudes" dirigirá la salida al archivo "longitudes". "wc -l \*.pdb | sort -n | head -n 1" creará un canal en el que la salida del comando "wc" es la entrada del comando "sort", la salida del comando "sort" es la entrada del comando "head" y la salida del comando "head" se dirige al intérprete de órdenes'}
+![](fig/redirects-and-pipes.svg){alt='Redirecciones y pipes de diferentes comandos: "wc -l \*.pdb" dirigirá la salida al shell. "wc -l \*.pdb > longitudes" dirigirá la salida al archivo "longitudes". "wc -l \*.pdb | sort -n | head -n 1" creará un canal en el que la salida del comando "wc" es la entrada del comando "sort", la salida del comando "sort" es la entrada del comando "head" y la salida del comando "head" se dirige al intérprete de órdenes'}
 
 ::::::::::::::::::::::::::::::::::::::: challenge
 
-## Uniendo comandos en tuberías
+## Uniendo comandos en pipes
 
 En nuestro directorio actual, queremos encontrar los 3 archivos que tienen el menor número de líneas. ¿Qué comando de los que aparecen a continuación funcionaría?
 
@@ -387,13 +387,13 @@ La opción 4 es la solución. El carácter `|` se utiliza para conectar la salid
 
 ## Herramientas diseñadas para trabajar juntas
 
-Esta idea de enlazar programas es la razón por la que Unix ha tenido tanto éxito. En lugar de crear enormes programas que intentan hacer muchas cosas diferentes, los programadores de Unix se centran en crear un montón de herramientas simples que cada una hace bien un trabajo, y que funcionan bien entre sí. Este modelo de programación se denomina "tuberías y filtros". Ya hemos visto las tuberías; un **filtro** es un programa como `wc` o `sort` que transforma un flujo de entrada en un flujo de salida. Casi todas las herramientas estándar de Unix pueden trabajar de esta manera. A menos que se les indique lo contrario, leen de la entrada estándar, hacen algo con lo que han leído y escriben en la salida estándar.
+Esta idea de enlazar programas es la razón por la que Unix ha tenido tanto éxito. En lugar de crear enormes programas que intentan hacer muchas cosas diferentes, los programadores de Unix se centran en crear un montón de herramientas simples que cada una hace bien un trabajo, y que funcionan bien entre sí. Este modelo de programación se denomina "pipes y filtros". Ya hemos visto las pipes; un **filtro** es un programa como `wc` o `sort` que transforma un flujo de entrada en un flujo de salida. Casi todas las herramientas estándar de Unix pueden trabajar de esta manera. A menos que se les indique lo contrario, leen de la entrada estándar, hacen algo con lo que han leído y escriben en la salida estándar.
 
-La clave es que cualquier programa que lea líneas de texto de la entrada estándar y escriba líneas de texto en la salida estándar puede combinarse con cualquier otro programa que también se comporte de esta manera. Puedes *y debes* escribir tus programas de esta forma para que tú y otras personas podáis poner esos programas en tuberías para multiplicar su potencia.
+La clave es que cualquier programa que lea líneas de texto de la entrada estándar y escriba líneas de texto en la salida estándar puede combinarse con cualquier otro programa que también se comporte de esta manera. Puedes *y debes* escribir tus programas de esta forma para que tú y otras personas podáis poner esos programas en pipes para multiplicar su potencia.
 
 ::::::::::::::::::::::::::::::::::::::: challenge
 
-## Comprensión de Lectura de Tuberías
+## Comprensión de Lectura de pipes
 
 Un fichero llamado `animals.csv` (en la carpeta `shell-lesson-data/exercise-data/animal-counts`) contiene los siguientes datos:
 
@@ -408,13 +408,13 @@ Un fichero llamado `animals.csv` (en la carpeta `shell-lesson-data/exercise-data
 2012-11-07,bear,1
 ```
 
-¿Qué texto pasa a través de cada una de las tuberías y la redirección final en la tubería de abajo? Nota, el comando `sort -r` ordena en orden inverso.
+¿Qué texto pasa a través de cada una de las pipes y la redirección final en la pipe de abajo? Nota, el comando `sort -r` ordena en orden inverso.
 
 ```bash
 $ cat animals.csv | head -n 5 | tail -n 3 | sort -r > final.txt
 ```
 
-Pista: construye la tubería comando a comando para comprobar tu comprensión
+Pista: construye la pipe comando a comando para comprobar tu comprensión
 
 ::::::::::::::: solution
 
@@ -434,7 +434,7 @@ El comando `head` extrae las 5 primeras líneas de `animals.csv`. A continuació
 
 ::::::::::::::::::::::::::::::::::::::: challenge
 
-## Construcción de tuberías
+## Construcción de pipes
 
 Para el fichero `animals.csv` del ejercicio anterior, considera el siguiente comando:
 
@@ -471,7 +471,7 @@ $ cut -d , -f 2 animals.csv | sort | uniq
 
 ::::::::::::::::::::::::::::::::::::::: challenge
 
-## ¿Qué Tubería?
+## ¿Qué pipe?
 
 El fichero `animals.csv` contiene 8 líneas de datos formateadas de la siguiente manera:
 
@@ -495,7 +495,7 @@ El comando `uniq` tiene una opción `-c` que proporciona un recuento del número
 
 ## Solución
 
-La opción 4. es la respuesta correcta. Si tienes dificultades para entender por qué, intenta ejecutar los comandos, o subsecciones de las tuberías (asegúrate de que estás en el directorio `shell-lesson-data/exercise-data/animal-counts`).
+La opción 4. es la respuesta correcta. Si tienes dificultades para entender por qué, intenta ejecutar los comandos, o subsecciones de las pipes (asegúrate de que estás en el directorio `shell-lesson-data/exercise-data/animal-counts`).
 
 
 
@@ -503,7 +503,7 @@ La opción 4. es la respuesta correcta. Si tienes dificultades para entender por
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Tubería de Nelle: Comprobación de archivos
+## Pipe de Nelle: Comprobación de archivos
 
 Nelle ha pasado sus muestras por las máquinas de ensayo y ha creado 17 archivos en el directorio `north-pacific-gyre` descrito anteriormente. Como comprobación rápida, partiendo del directorio `shell-lesson-data`, Nelle teclea:
 
@@ -599,8 +599,8 @@ Supongamos que desea eliminar los archivos de datos procesados y conservar sólo
 - `tail` muestra por defecto las 10 últimas líneas de su entrada sin argumentos adicionales.
 - `command > [file]` redirige la salida de un comando a un archivo (sobreescribiendo cualquier contenido existente).
 - `command >> [file]` añade la salida de un comando a un archivo.
-- `[first] | [second]` es una tubería: la salida del primer comando se usa como entrada del segundo.
-- La mejor manera de usar el shell es usar tuberías para combinar programas simples de un solo propósito (filtros).
+- `[first] | [second]` es una pipe: la salida del primer comando se usa como entrada del segundo.
+- La mejor manera de usar el shell es usar pipes para combinar programas simples de un solo propósito (filtros).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
