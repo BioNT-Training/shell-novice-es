@@ -2,31 +2,19 @@
 site: sandpaper::sandpaper_site
 ---
 
-The Unix shell has been around longer than most of its users
-have been alive. It has survived because it's a powerful tool that
-allows users to perform complex and powerful tasks, often with just
-a few keystrokes or lines of code. It helps users automate repetitive
-tasks and easily combine smaller tasks into larger, more powerful workflows.
 
-Use of the shell is fundamental to a wide range of advanced computing
-tasks, including high-performance computing. These lessons will introduce
-you to this powerful tool.
+El shell de Unix existe desde hace más tiempo que la mayoría de sus usuarios. Ha sobrevivido porque es una poderosa herramienta que permite a los usuarios realizar tareas complejas y potentes, a menudo con sólo unas pocas pulsaciones de teclas o líneas de código. Ayuda a los usuarios a automatizar tareas repetitivas y a combinar fácilmente tareas más pequeñas en flujos de trabajo más grandes y potentes.
 
-::::::::::::::::::::::::::::::::::::::::::  prereq
+El uso del shell es fundamental para una amplia gama de tareas informáticas avanzadas, incluyendo la computación de alto rendimiento. Estas lecciones le introducirán en esta potente herramienta.
 
-## Prerequisites
+:::::::::::::::::::::::::::::::::::::::::: prereq
 
-This lesson guides you through the basics of file systems and the
-shell. If you have stored files on a computer at all and recognize
-the word "file" and either "directory" or "folder" (two common words
-for the same thing), you're ready for this lesson.
+## Prerrequisitos
 
-If you're already comfortable manipulating files and directories,
-searching for files with `grep` and `find`, and writing simple loops
-and scripts, you probably want to explore the next lesson:
-[shell-extras](https://carpentries-incubator.github.io/shell-extras/).
+Esta lección te guía a través de los conceptos básicos de los sistemas de ficheros y el shell. Si has almacenado archivos en una computadora y reconoces la palabra "archivo" y "directorio" o "carpeta" (dos palabras comunes para la misma cosa), estás listo para esta lección.
+
+Si ya te sientes cómodo manipulando archivos y directorios, buscando archivos con `grep` y `find`, y escribiendo bucles y scripts simples, probablemente quieras explorar la siguiente lección: [shell-extras](https://carpentries-incubator.github.io/shell-extras/).
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
 
