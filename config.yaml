@@ -11,7 +11,7 @@
 carpentry: 'swc'
 
 # Overall title for pages.
-title: 'The Unix Shell'
+title: 'El shell de Unix'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
 created: '2014-10-22'
