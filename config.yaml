@@ -89,9 +89,9 @@ lang: es
 languages:
   default: "Español"
   other:
+    - lang: Deutsch
+      url: "https://biont-training.github.io/shell-novice-de"
     - lang: English
       url: "https://biont-training.github.io/shell-novice-en"
-    - lang: German
-      url: "https://biont-training.github.io/shell-novice-de"
-    - lang: Italian
+    - lang: Italiano
       url: "https://biont-training.github.io/shell-novice-it"
