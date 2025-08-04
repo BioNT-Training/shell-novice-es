@@ -85,3 +85,13 @@ profiles:
 url: 'https://swcarpentry.github.io/shell-novice'
 analytics: carpentries
 lang: es
+
+languages:
+  default: "Español"
+  other:
+    - lang: English
+      url: "https://biont-training.github.io/shell-novice-en"
+    - lang: German
+      url: "https://biont-training.github.io/shell-novice-de"
+    - lang: Italian
+      url: "https://biont-training.github.io/shell-novice-it"
