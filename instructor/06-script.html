@@ -47,6 +47,16 @@
           </ul></li>
       </div>
 
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+          <b>Español</b>  <i data-feather="chevron-down"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2"><li><button class="dropdown-item" type="button"><a href="https://biont-training.github.io/shell-novice-de" class="external-link">Deutsch</a></button></li>
+          <li><button class="dropdown-item" type="button"><a href="https://biont-training.github.io/shell-novice-en" class="external-link">English</a></button></li>
+          <li><button class="dropdown-item" type="button"><a href="https://biont-training.github.io/shell-novice-it" class="external-link">Italiano</a></button></li>
+        </ul></div>
+
       <div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Vista de la instructora <i data-feather="chevron-down"></i>
@@ -427,6 +437,7 @@ obtendríamos si ejecutáramos ese pipeline directamente.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Aviso</span>
 <div id="texto-vs.-lo-que-sea" class="callout-inner">
 <h3 class="callout-title">Texto vs. Lo que sea</h3>
 <div class="callout-content">
@@ -494,8 +505,10 @@ ATOM     13  H           1      -1.183   0.500  -1.412  1.00  0.00</code></pre>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Aviso</span>
 <div id="comillas-dobles-alrededor-de-los-argumentos" class="callout-inner">
-<h3 class="callout-title">Comillas dobles alrededor de los argumentos</h3>
+<h3 class="callout-title">Comillas dobles alrededor de los
+argumentos</h3>
 <div class="callout-content">
 <p>Por la misma razón que ponemos la variable de bucle dentro de
 comillas dobles, en caso de que el nombre del fichero contenga espacios,
@@ -626,6 +639,7 @@ wc -l "$@" | sort -n</code></pre>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Desafío</span>
 <div id="lista-de-especies-únicas" class="callout-inner">
 <h3 class="callout-title">Lista de especies únicas</h3>
 <div class="callout-content">
@@ -661,7 +675,7 @@ por separado.</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -706,8 +720,10 @@ completamente exacto de cómo creamos esa figura.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Desafío</span>
 <div id="por-qué-registrar-los-comandos-en-el-historial-antes-de-ejecutarlos" class="callout-inner">
-<h3 class="callout-title">¿Por qué registrar los comandos en el historial antes de ejecutarlos?</h3>
+<h3 class="callout-title">¿Por qué registrar los comandos en el
+historial antes de ejecutarlos?</h3>
 <div class="callout-content">
 <p>Si ejecutas el comando:</p>
 <div class="codewrapper sourceCode" id="cb28">
@@ -730,7 +746,7 @@ shell <em>siempre</em> añade comandos al registro antes de ejecutarlos.
   Solución
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Si un comando hace que algo se bloquee o se cuelgue, puede ser útil
 saber cuál era ese comando para investigar el problema. Si el comando
@@ -817,6 +833,7 @@ complejidad.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Desafío</span>
 <div id="variables-en-shell-scripts" class="callout-inner">
 <h3 class="callout-title">Variables en Shell Scripts</h3>
 <div class="callout-content">
@@ -859,7 +876,7 @@ que termina en <code>.pdb</code> en el directorio
   Solución
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>La respuesta correcta es 2.</p>
 <p>Las variables especiales <code>$1</code>, <code>$2</code> y
@@ -882,8 +899,10 @@ expande dentro del script por <code>head</code> y <code>tail</code>.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Desafío</span>
 <div id="encuentra-el-fichero-más-largo-con-una-extensión-dada" class="callout-inner">
-<h3 class="callout-title">Encuentra el fichero más largo con una extensión dada</h3>
+<h3 class="callout-title">Encuentra el fichero más largo con una
+extensión dada</h3>
 <div class="callout-content">
 <p>Escribe un script de shell llamado <code>longest.sh</code> que tome
 como argumentos el nombre de un directorio y una extensión de nombre de
@@ -913,7 +932,7 @@ líneas.</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb40">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -943,6 +962,7 @@ estar seguros de que entendemos la salida.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Desafío</span>
 <div id="comprensión-de-lectura-del-script" class="callout-inner">
 <h3 class="callout-title">Comprensión de lectura del script</h3>
 <div class="callout-content">
@@ -984,7 +1004,7 @@ respectivamente.</p>
   Soluciones
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>En cada caso, el shell expande el comodín en <code>*.pdb</code> antes
 de pasar la lista resultante de nombres de archivo como argumentos al
@@ -1013,6 +1033,7 @@ argumentos dados a un script de shell.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Desafío</span>
 <div id="scripts-de-depuración" class="callout-inner">
 <h3 class="callout-title">Scripts de depuración</h3>
 <div class="callout-content">
@@ -1055,7 +1076,7 @@ error?</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <p>La opción <code>-x</code> hace que <code>bash</code> se ejecute en
 modo de depuración. Esto imprime cada comando a medida que se ejecuta,
@@ -1071,8 +1092,8 @@ no existe, por lo que devuelve una cadena vacía.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Puntos Clave</span>
 <div class="callout-inner">
-<h3 class="callout-title">Puntos Clave</h3>
 <div class="callout-content">
 <ul><li>Guarda comandos en archivos (normalmente llamados shell scripts)
 para reutilizarlos.</li>
@@ -1122,15 +1143,17 @@ y más consistente con los comandos Unix incorporados.</li>
 	
         | <a href="https://github.com/swcarpentry/shell-novice/blob/main/CONTRIBUTING.md" class="external-link">Contribuir</a>
         | <a href="https://github.com/swcarpentry/shell-novice/" class="external-link">Fuente</a></p>
-				<p><a href="https://github.com/swcarpentry/shell-novice/blob/main/CITATION" class="external-link">Cita</a> | <a href="mailto:team@carpentries.org">Contacto</a> | <a href="https://carpentries.org/about/" class="external-link">Acerca de</a></p>
-			</div>
-			<div class="col-md-6">
+        <p>
+        <a href="https://github.com/swcarpentry/shell-novice/blob/main/" class="external-link">Cita</a>
+        | <a href="mailto:team@carpentries.org">Contacto</a> | <a href="https://carpentries.org/about/" class="external-link">Acerca de</a></p>
+		</div>
+		<div class="col-md-6">
 
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Plantilla compartida bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> por <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Construido con <a href="https://github.com/carpentries/sandpaper/tree/0.16.12" class="external-link">sandpaper (0.16.12)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a> y <a href="https://github.com/carpentries/varnish/tree/1.0.6" class="external-link">varnish (1.0.6)</a></p>
-			</div>
+        <p>Construido con <a href="https://github.com/carpentries/sandpaper/tree/0.17.3" class="external-link">sandpaper (0.17.3)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a> y <a href="https://github.com/carpentries/varnish/tree/1.0.9" class="external-link">varnish (1.0.9)</a></p>
+		</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
 		<a href="#top">
@@ -1152,7 +1175,7 @@ y más consistente con los comandos Unix incorporados.</li>
   "identifier": "https://swcarpentry.github.io/shell-novice/instructor/06-script.html",
   "dateCreated": "2014-10-22",
   "dateModified": "2025-04-03",
-  "datePublished": "2025-08-04"
+  "datePublished": "2026-01-15"
 }
 
   </script><script>
